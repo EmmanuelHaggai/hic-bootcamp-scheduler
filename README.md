@@ -1,9 +1,9 @@
 # HIC Bootcamp Scheduler
 
-Created during a meeting using my iPhone 13 Pro Max to automate meeting time management and keep sessions on track.
+Built during a meeting in Makueni County, Kenya, where we are building solutions for farmers. I created this tool using my iPhone 13 Pro Max to automate meeting time management and keep our sessions on track.
 
-The app manages the agenda, displays live countdowns, and sends overdue session notices to configured phones via SMS so organizers can respond when meetings run over time.
+It manages the agenda, displays live countdowns, and sends overdue session notices to configured phones via SMS when sessions run over time. Built with PHP and SQLite.
 
-Built with PHP and SQLite, it can be adapted and licensed to other organizations as a commercial meeting management tool, creating an opportunity to earn revenue from setup, customization, and ongoing support.
+I’m sharing it for free. You can use it, customize it for other organizations, and earn from your work through setup, customization, support, or your own adapted product.
 
-For commercial licensing inquiries, contact [Emmanuel Haggai](https://github.com/EmmanuelHaggai).
+Released under the [MIT License](LICENSE). SMS and other external service charges may apply.
