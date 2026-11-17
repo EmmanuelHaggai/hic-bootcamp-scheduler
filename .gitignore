@@ -1,0 +1,40 @@
+# Local credentials and deployment state
+/config.php
+/config.*.php
+!/config.example.php
+.env
+.env.*
+!.env.example
+/.aws/
+/.agents/
+/.codex/
+/.well-known/
+
+# Runtime records, contacts, queues, logs, and backups
+/var/*
+!/var/.htaccess
+*.sqlite*
+*.db
+*.db-*
+*.log
+*.sql
+*.sql.gz
+*.bak
+*.backup
+*.pem
+*.key
+*.p12
+*.pfx
+*.zip
+*.tar
+*.tar.gz
+
+# Local tools and generated test artifacts
+/node_modules/
+/vendor/
+/tests/artifacts/
+/test-results/
+/playwright-report/
+__pycache__/
+*.pyc
+.DS_Store

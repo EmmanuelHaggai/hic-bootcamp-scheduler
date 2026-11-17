@@ -1,0 +1,45 @@
+Options -Indexes -MultiViews
+DirectoryIndex index.php
+<FilesMatch "^(config.*\.php|cron\.php|README\.md|.*\.sqlite.*)$">
+    Require all denied
+</FilesMatch>
+
+RewriteEngine On
+
+# Redirect only explicit browser requests, never an internal rewrite.
+# Keep legacy webhook POSTs working for gateways that do not follow redirects.
+RewriteCond %{THE_REQUEST} \s/+webhook\.php[?\s] [NC]
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^webhook\.php$ /webhook [R=308,L,NE]
+
+RewriteCond %{THE_REQUEST} \s/+index\.php[?\s] [NC]
+RewriteCond %{QUERY_STRING} (^|&)state(=[^&]*)?(&|$) [NC]
+RewriteRule ^index\.php$ /api/agenda [R=308,L,NE]
+
+RewriteCond %{THE_REQUEST} \s/+timer\.php[?\s] [NC]
+RewriteCond %{QUERY_STRING} (^|&)state(=[^&]*)?(&|$) [NC]
+RewriteRule ^timer\.php$ /api/timer [R=308,L,NE]
+
+RewriteCond %{THE_REQUEST} \s/+index\.php[?\s] [NC]
+RewriteRule ^index\.php$ / [R=308,L,NE]
+
+RewriteCond %{THE_REQUEST} \s/+control\.php[?\s] [NC]
+RewriteRule ^control\.php$ /control [R=308,L,NE]
+
+RewriteCond %{THE_REQUEST} \s/+timer\.php[?\s] [NC]
+RewriteRule ^timer\.php$ /timer [R=308,L,NE]
+
+RewriteCond %{THE_REQUEST} \s/+display-version\.php[?\s] [NC]
+RewriteRule ^display-version\.php$ /api/display-version [R=308,L,NE]
+
+RewriteRule ^(timer/session|timer|control|agenda|webhook|api/(agenda|timer|display-version))/$ /$1 [R=308,L,NE]
+
+# Whitelist public routes; do not expose arbitrary PHP files without extensions.
+RewriteRule ^api/agenda$ index.php?state=1 [QSA,END]
+RewriteRule ^api/timer$ timer.php?state=1 [QSA,END]
+RewriteRule ^api/display-version$ display-version.php [END]
+RewriteRule ^timer/session$ timer.php?mode=session [QSA,END]
+RewriteRule ^timer$ timer.php [END]
+RewriteRule ^control$ control.php [END]
+RewriteRule ^agenda$ index.php [END]
+RewriteRule ^webhook$ webhook.php [END]
